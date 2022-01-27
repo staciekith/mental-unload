@@ -1,10 +1,16 @@
 SHELL := /opt/homebrew/bin/fish
 
-run-dev-app:
+run:
 	FLASK_ENV=development FLASK_APP=mental_unload flask run
 
-run-dev:
-	FLASK_ENV=development FLASK_APP=$(app) flask run
+migration-init:
+	flask db init
+
+migration-gen:
+	flask db migrate
+
+migration-run:
+	flask db upgrade
 
 venv-create:
 	virtualenv .venv
