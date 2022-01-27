@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from app import create_app, db, cli
+from app import create_app, db
 import config
 
 load_dotenv()
