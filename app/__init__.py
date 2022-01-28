@@ -21,4 +21,4 @@ def create_app(config_object=Config):
 
     return app
 
-from app.main import models
+from app import models
