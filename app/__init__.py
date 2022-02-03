@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 db = SQLAlchemy()
-migrate = Migrate(directory='app/adapters/database/migrations')
+migrate = Migrate(directory='app/adapters/postgres_database/migrations')
 
 def create_app(config_object=Config):
     app = Flask(__name__)
