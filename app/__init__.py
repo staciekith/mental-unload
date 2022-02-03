@@ -1,5 +1,3 @@
-from distutils.debug import DEBUG
-import os
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -21,4 +19,4 @@ def create_app(config_object=Config):
 
     return app
 
-from app import models
+from app.adapters.postgres_database import models
