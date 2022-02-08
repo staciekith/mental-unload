@@ -6,16 +6,18 @@ class Event(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(), nullable=False)
-    description = db.Column(db.Text)
-    due_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    reminder_date = db.Column(db.DateTime, nullable=False)
-    status = db.Column(db.String(), nullable=False, default='pending')
+    quantity = db.Column(db.Integer, nullable=False)
+    done_at = db.Column(db.DateTime)
+    due_at = db.Column(db.DateTime)
+    remind_at = db.Column(db.DateTime)
+    status = db.Column(db.String(), nullable=False, default='done')
 
     def __init__(self, props):
         self.title = props.title
-        self.description = props.description
-        self.due_date = props.due_date
-        self.reminder_date = props.reminder_date
+        self.quantity = props.quantity
+        self.done_at = props.done_at
+        self.due_at = props.due_date
+        self.remind_at = props.remind_at
         self.status = props.status
 
     def __repr__(self):
@@ -25,8 +27,9 @@ class Event(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'description': self.description,
-            'due_date': self.due_date,
-            'reminder_date': self.reminder_date,
+            'quantity': self.quantity,
+            'done_at': self.done_at,
+            'due_at': self.due_at,
+            'remind_at': self.remind_at,
             'status': self.status
         }

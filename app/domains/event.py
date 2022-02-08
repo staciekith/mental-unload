@@ -5,7 +5,6 @@ import datetime
 class Event:
     id: int
     title: str
-    description: str
     due_date: datetime
     reminder_date: datetime
     status: str
