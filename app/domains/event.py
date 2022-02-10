@@ -5,9 +5,12 @@ import datetime
 class Event:
     id: int
     title: str
-    due_date: datetime
-    reminder_date: datetime
+    quantity: int
+    done_at: datetime
+    due_at: datetime
+    remind_at: datetime
     status: str
+    type_id: int
 
     @classmethod
     def from_dict(self, d):
