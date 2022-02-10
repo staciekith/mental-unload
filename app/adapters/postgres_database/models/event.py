@@ -1,5 +1,4 @@
 from app import db
-from datetime import datetime
 
 class Event(db.Model):
     __tablename__ = 'event'
@@ -13,7 +12,7 @@ class Event(db.Model):
     status = db.Column(db.String(), nullable=False, default='done')
 
     type_id = db.Column(db.Integer, db.ForeignKey('event_type.id'), nullable=False)
-    type = db.relationship('Event_type', backref=db.backref('events', lazy=True))
+    type = db.relationship('EventType', backref=db.backref('events', lazy=True))
 
     def __init__(self, props):
         self.title = props.title
