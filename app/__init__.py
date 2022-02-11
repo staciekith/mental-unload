@@ -13,10 +13,10 @@ def create_app(config_object=Config):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    with app.app_context():
+        # Import parts of our application
+        from .api import event_type_api
 
-    return app
+        return app
 
 from app.adapters.postgres_database import models

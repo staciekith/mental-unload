@@ -8,3 +8,10 @@ class EventTypeRepo:
 
         return [EventType(**row.serialize()) for row in results]
 
+    def create(event_type: EventType) -> EventType:
+        event_type_model = EventTypeModel(event_type)
+        created_event_type = EventTypeModel.create(event_type_model)
+
+        event_type_model.id = created_event_type.id
+
+        return EventType(**event_type_model.serialize())

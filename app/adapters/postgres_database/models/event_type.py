@@ -32,3 +32,9 @@ class EventType(db.Model):
             'unit_duration': self.unit_duration,
             'reminder_delay': self.reminder_delay
         }
+
+    def create(event_type):
+        db.session.add(event_type)
+        db.session.commit()
+
+        return event_type
