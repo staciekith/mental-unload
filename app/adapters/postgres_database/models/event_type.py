@@ -38,3 +38,7 @@ class EventType(db.Model):
         db.session.commit()
 
         return event_type
+
+    def delete(event_type):
+        db.session.delete(event_type)
+        db.session.commit()

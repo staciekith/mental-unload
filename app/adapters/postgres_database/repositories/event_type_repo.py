@@ -15,3 +15,9 @@ class EventTypeRepo:
         event_type_model.id = created_event_type.id
 
         return EventType(**event_type_model.serialize())
+
+    def delete(event_type_id: int) -> None:
+        event_type_to_delete = EventTypeModel.query.get(event_type_id)
+
+        if (event_type_to_delete):
+            EventTypeModel.delete(event_type_to_delete)
