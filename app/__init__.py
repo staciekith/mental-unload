@@ -16,6 +16,7 @@ def create_app(config_object=Config):
     with app.app_context():
         # Import parts of our application
         from .api import event_type_api
+        from .api import event_api
 
         return app
 

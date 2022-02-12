@@ -10,6 +10,7 @@ class EventType(db.Model):
     unit_quantity = db.Column(db.Integer, nullable=False)
     unit_duration = db.Column(db.Integer, nullable=False)
     reminder_delay = db.Column(db.Integer, nullable=False)
+    events = db.relationship('Event', backref=db.backref('type', lazy=True))
 
     def __init__(self, props):
         self.name = props.name

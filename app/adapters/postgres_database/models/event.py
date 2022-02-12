@@ -10,15 +10,13 @@ class Event(db.Model):
     due_at = db.Column(db.DateTime)
     remind_at = db.Column(db.DateTime)
     status = db.Column(db.String(), nullable=False, default='done')
-
     type_id = db.Column(db.Integer, db.ForeignKey('event_type.id'), nullable=False)
-    type = db.relationship('EventType', backref=db.backref('events', lazy=True))
 
     def __init__(self, props):
         self.title = props.title
         self.quantity = props.quantity
         self.done_at = props.done_at
-        self.due_at = props.due_date
+        self.due_at = props.due_at
         self.remind_at = props.remind_at
         self.status = props.status
         self.type_id = props.type_id
@@ -37,3 +35,13 @@ class Event(db.Model):
             'status': self.status,
             'type_id': self.type_id
         }
+
+    def create(event):
+        db.session.add(event)
+        db.session.commit()
+
+        return event
+
+    def delete(event):
+        db.session.delete(event)
+        db.session.commit()
