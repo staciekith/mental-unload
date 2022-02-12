@@ -1,4 +1,5 @@
-SHELL := /opt/homebrew/bin/fish
+req:
+	pip3 install -r requirements.txt
 
 run:
 	FLASK_ENV=development FLASK_APP=mental_unload flask run
