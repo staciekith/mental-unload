@@ -1,5 +1,4 @@
 
-from datetime import datetime
 from app.adapters.postgres_database.repositories.event_repo import EventRepo
 from app.use_cases.list_events import ListEvents
 from app.use_cases.create_event import CreateEvent
@@ -19,22 +18,14 @@ def events():
 
 @app.route('/events/<int:event_id>', methods=['DELETE'])
 def event(event_id):
-    print(event_id)
     DeleteEvent.execute(EventRepo, event_id)
 
     return 'OK', 200
 
 def post_events():
     request_data = request.get_json()
-    request_data['id'] = None
-    request_data['done_at'] = datetime.now()
-    request_data['status'] = 'done'
-    request_data['due_at'] = None
-    request_data['remind_at'] = None
-    event = Event.from_dict(request_data)
-    # creer l'event pour le reminder
 
-    created_event = CreateEvent.execute(EventRepo, event)
+    created_event = CreateEvent.execute(EventRepo, request_data)
 
     return jsonify(created_event)
 

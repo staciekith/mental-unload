@@ -25,10 +25,8 @@ def event_type(event_type_id):
 
 def post_event_types():
     request_data = request.get_json()
-    request_data['id'] = None
-    event_type = EventType.from_dict(request_data)
 
-    created_event_type = CreateEventType.execute(EventTypeRepo, event_type)
+    created_event_type = CreateEventType.execute(EventTypeRepo, request_data)
 
     return jsonify(created_event_type)
 
