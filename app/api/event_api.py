@@ -1,5 +1,6 @@
 
 from app.adapters.postgres_database.repositories.event_repo import EventRepo
+from app.adapters.postgres_database.repositories.event_type_repo import EventTypeRepo
 from app.use_cases.list_events import ListEvents
 from app.use_cases.create_event import CreateEvent
 from app.use_cases.delete_event import DeleteEvent
@@ -25,7 +26,7 @@ def event(event_id):
 def post_events():
     request_data = request.get_json()
 
-    created_event = CreateEvent.execute(EventRepo, request_data)
+    created_event = CreateEvent.execute(EventRepo, EventTypeRepo, request_data)
 
     return jsonify(created_event)
 

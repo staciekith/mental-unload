@@ -156,7 +156,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Automatically create a reminder when an event is created as done
+- [x] Automatically create a reminder when an event is created as done
 - [ ] Tests
 - [ ] Authentication / Authorization
 
