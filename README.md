@@ -157,6 +157,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 ## Roadmap
 
 - [x] Automatically create a reminder when an event is created as done
+- [ ] Update an event and even_type
 - [ ] Tests
 - [ ] Authentication / Authorization
 
@@ -197,7 +198,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@staciekith](https://twitter.com/staciekith) - stae.dev@gmail.com
+KITH Stacie - [@staciekith](https://twitter.com/staciekith) - stae.dev@gmail.com
 
 Project Link: [https://github.com/staciekith/mental-unload](https://github.com/staciekith/mental-unload)
 

@@ -21,6 +21,21 @@ class EventTypeRepo:
 
         return EventType(**event_type_model.serialize())
 
+    def update(event_type_id: int, event_type: EventType) -> EventType:
+        event_type_to_update = EventTypeModel.query.get(event_type_id)
+
+        if (event_type_to_update):
+            event_type_to_update.name = event_type.name
+            event_type_to_update.description = event_type.description
+            event_type_to_update.unit_label = event_type.unit_label
+            event_type_to_update.unit_quantity = event_type.unit_quantity
+            event_type_to_update.unit_duration = event_type.unit_duration
+            event_type_to_update.reminder_delay = event_type.reminder_delay
+
+            EventTypeModel.update(event_type_to_update)
+
+        return EventType(**event_type_to_update.serialize())
+
     def delete(event_type_id: int) -> None:
         event_type_to_delete = EventTypeModel.query.get(event_type_id)
 

@@ -2,6 +2,7 @@
 from app.adapters.postgres_database.repositories.event_type_repo import EventTypeRepo
 from app.use_cases.list_event_types import ListEventTypes
 from app.use_cases.create_event_type import CreateEventType
+from app.use_cases.update_event_type import UpdateEventType
 from app.use_cases.delete_event_type import DeleteEventType
 from app.domains.event_type import EventType
 
@@ -16,12 +17,12 @@ def event_types():
     else:
         return get_event_types()
 
-@app.route('/event_types/<int:event_type_id>', methods=['DELETE'])
+@app.route('/event_types/<int:event_type_id>', methods=['DELETE', 'PUT'])
 def event_type(event_type_id):
-    print(event_type_id)
-    DeleteEventType.execute(EventTypeRepo, event_type_id)
-
-    return 'OK', 200
+    if request.method == 'DELETE':
+        return delete_event_type(event_type_id)
+    else:
+        return put_event_type(event_type_id)
 
 def post_event_types():
     request_data = request.get_json()
@@ -34,3 +35,15 @@ def get_event_types():
     resp = ListEventTypes.execute(EventTypeRepo)
 
     return jsonify(resp)
+
+def delete_event_type(event_type_id):
+    DeleteEventType.execute(EventTypeRepo, event_type_id)
+
+    return 'OK', 200
+
+def put_event_type(event_type_id):
+    request_data = request.get_json()
+
+    updated_event_type = UpdateEventType.execute(EventTypeRepo, event_type_id, request_data)
+
+    return jsonify(updated_event_type)

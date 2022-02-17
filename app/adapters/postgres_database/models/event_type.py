@@ -40,6 +40,11 @@ class EventType(db.Model):
 
         return event_type
 
+    def update(event_type):
+        db.session.commit()
+
+        return event_type
+
     def delete(event_type):
         db.session.delete(event_type)
         db.session.commit()
