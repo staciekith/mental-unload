@@ -162,6 +162,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [ ] Errors management
 - [ ] Tests
 - [ ] Authentication / Authorization
+- [ ] API documentation
 
 
 See the [open issues](https://github.com/staciekith/mental-unload/issues) for a full list of proposed features (and known issues).
