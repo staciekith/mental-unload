@@ -11,7 +11,10 @@ class EventTypeRepo:
     def find(event_type_id: int) -> EventType:
         event_type_model = EventTypeModel.query.get(event_type_id)
 
-        return EventType(**event_type_model.serialize())
+        if (event_type_model):
+            return EventType(**event_type_model.serialize())
+
+        return None
 
     def create(event_type: EventType) -> EventType:
         event_type_model = EventTypeModel(event_type)
@@ -24,15 +27,14 @@ class EventTypeRepo:
     def update(event_type_id: int, event_type: EventType) -> EventType:
         event_type_to_update = EventTypeModel.query.get(event_type_id)
 
-        if (event_type_to_update):
-            event_type_to_update.name = event_type.name
-            event_type_to_update.description = event_type.description
-            event_type_to_update.unit_label = event_type.unit_label
-            event_type_to_update.unit_quantity = event_type.unit_quantity
-            event_type_to_update.unit_duration = event_type.unit_duration
-            event_type_to_update.reminder_delay = event_type.reminder_delay
+        event_type_to_update.name = event_type.name
+        event_type_to_update.description = event_type.description
+        event_type_to_update.unit_label = event_type.unit_label
+        event_type_to_update.unit_quantity = event_type.unit_quantity
+        event_type_to_update.unit_duration = event_type.unit_duration
+        event_type_to_update.reminder_delay = event_type.reminder_delay
 
-            EventTypeModel.update(event_type_to_update)
+        EventTypeModel.update(event_type_to_update)
 
         return EventType(**event_type_to_update.serialize())
 

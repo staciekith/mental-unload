@@ -42,6 +42,11 @@ class Event(db.Model):
 
         return event
 
+    def update(event):
+        db.session.commit()
+
+        return event
+
     def delete(event):
         db.session.delete(event)
         db.session.commit()

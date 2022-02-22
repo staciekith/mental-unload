@@ -3,6 +3,7 @@ from app.adapters.postgres_database.repositories.event_repo import EventRepo
 from app.adapters.postgres_database.repositories.event_type_repo import EventTypeRepo
 from app.use_cases.list_events import ListEvents
 from app.use_cases.create_event import CreateEvent
+from app.use_cases.update_event import UpdateEvent
 from app.use_cases.delete_event import DeleteEvent
 from app.domains.event import Event
 
@@ -17,11 +18,12 @@ def events():
     else:
         return get_events()
 
-@app.route('/events/<int:event_id>', methods=['DELETE'])
+@app.route('/events/<int:event_id>', methods=['DELETE', 'PUT'])
 def event(event_id):
-    DeleteEvent.execute(EventRepo, event_id)
-
-    return 'OK', 200
+    if request.method == 'DELETE':
+        return delete_event(event_id)
+    else:
+        return put_event(event_id)
 
 def post_events():
     request_data = request.get_json()
@@ -34,3 +36,18 @@ def get_events():
     resp = ListEvents.execute(EventRepo)
 
     return jsonify(resp)
+
+def delete_event(event_id):
+    DeleteEvent.execute(EventRepo, event_id)
+
+    return 'OK', 200
+
+def put_event(event_id):
+    request_data = request.get_json()
+
+    result = UpdateEvent.execute(EventRepo, event_id, request_data)
+
+    if "error" in result.keys():
+        return jsonify(result.get("error")), 400
+
+    return jsonify(result.get("ok"))

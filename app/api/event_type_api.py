@@ -44,6 +44,9 @@ def delete_event_type(event_type_id):
 def put_event_type(event_type_id):
     request_data = request.get_json()
 
-    updated_event_type = UpdateEventType.execute(EventTypeRepo, event_type_id, request_data)
+    result = UpdateEventType.execute(EventTypeRepo, event_type_id, request_data)
 
-    return jsonify(updated_event_type)
+    if "error" in result.keys():
+        return jsonify(result.get("error")), 400
+
+    return jsonify(result.get("ok"))

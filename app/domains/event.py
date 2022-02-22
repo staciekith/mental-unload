@@ -14,7 +14,16 @@ class Event:
 
     @classmethod
     def from_dict(self, d):
-        return self(**d)
+        self.id = d.get('id')
+        self.title = d.get('title')
+        self.quantity = d.get('quantity')
+        self.done_at = d.get('done_at')
+        self.due_at = d.get('due_at')
+        self.remind_at = d.get('remind_at')
+        self.status = d.get('status')
+        self.type_id = d.get('type_id')
+
+        return self
 
     def to_dict(self):
         return dataclasses.asdict(self)
