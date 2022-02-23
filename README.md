@@ -158,7 +158,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 
 - [x] Automatically create a reminder when an event is created as done
 - [x] Create/update an event and even_type
-- [ ] Validations
+- [x] Validations
 - [ ] Errors management
 - [ ] Tests
 - [ ] Authentication / Authorization

@@ -5,6 +5,7 @@ from app.use_cases.create_event_type import CreateEventType
 from app.use_cases.update_event_type import UpdateEventType
 from app.use_cases.delete_event_type import DeleteEventType
 from app.domains.event_type import EventType
+from app.domains.error import Error
 
 from flask import current_app as app
 from flask import jsonify
@@ -26,6 +27,13 @@ def event_type(event_type_id):
 
 def post_event_types():
     request_data = request.get_json()
+
+    missing_fields = EventType.validate_fields(request_data)
+
+    if (0 != len(missing_fields)):
+        error = Error("Some fields are missing.", {"missing_fields": missing_fields})
+
+        return jsonify(error), 400
 
     created_event_type = CreateEventType.execute(EventTypeRepo, request_data)
 
