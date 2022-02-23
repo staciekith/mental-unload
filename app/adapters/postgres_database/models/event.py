@@ -50,3 +50,5 @@ class Event(db.Model):
     def delete(event):
         db.session.delete(event)
         db.session.commit()
+
+        return event

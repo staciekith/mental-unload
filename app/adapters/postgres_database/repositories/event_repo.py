@@ -34,12 +34,12 @@ class EventRepo:
         event_to_update.remind_at = event.remind_at
         event_to_update.status = event.status
 
-        EventModel.update(event_to_update)
+        event_to_update = EventModel.update(event_to_update)
 
         return Event(**event_to_update.serialize())
 
     def delete(event_id: int) -> None:
         event_to_delete = EventModel.query.get(event_id)
+        event_to_delete = EventModel.delete(event_to_delete)
 
-        if (event_to_delete):
-            EventModel.delete(event_to_delete)
+        return Event(**event_to_delete.serialize())

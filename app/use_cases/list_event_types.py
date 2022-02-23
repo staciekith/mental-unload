@@ -5,4 +5,4 @@ class ListEventTypes:
     def execute(repo) -> List[EventType]:
         event_types = repo.list()
 
-        return event_types
+        return {"ok": event_types}

@@ -35,19 +35,28 @@ def post_event_types():
 
         return jsonify(error), 400
 
-    created_event_type = CreateEventType.execute(EventTypeRepo, request_data)
+    result = CreateEventType.execute(EventTypeRepo, request_data)
 
-    return jsonify(created_event_type)
+    if "error" in result.keys():
+        return jsonify(result.get("error")), 400
+
+    return jsonify(result.get("ok"))
 
 def get_event_types():
-    resp = ListEventTypes.execute(EventTypeRepo)
+    result = ListEventTypes.execute(EventTypeRepo)
 
-    return jsonify(resp)
+    if "error" in result.keys():
+        return jsonify(result.get("error")), 400
+
+    return jsonify(result.get("ok"))
 
 def delete_event_type(event_type_id):
-    DeleteEventType.execute(EventTypeRepo, event_type_id)
+    result = DeleteEventType.execute(EventTypeRepo, event_type_id)
 
-    return 'OK', 200
+    if "error" in result.keys():
+        return jsonify(result.get("error")), 400
+
+    return jsonify(result.get("ok"))
 
 def put_event_type(event_type_id):
     request_data = request.get_json()

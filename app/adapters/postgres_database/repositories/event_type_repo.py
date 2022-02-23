@@ -40,6 +40,6 @@ class EventTypeRepo:
 
     def delete(event_type_id: int) -> None:
         event_type_to_delete = EventTypeModel.query.get(event_type_id)
+        event_type_to_delete = EventTypeModel.delete(event_type_to_delete)
 
-        if (event_type_to_delete):
-            EventTypeModel.delete(event_type_to_delete)
+        return EventType(**event_type_to_delete.serialize())

@@ -35,4 +35,4 @@ class CreateEvent:
         reminder = Event.from_dict(reminder)
         event_repo.create(reminder)
 
-        return created_event
+        return {"ok": created_event}

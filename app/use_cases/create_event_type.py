@@ -7,4 +7,4 @@ class CreateEventType:
 
         created_event_type = repo.create(event_type)
 
-        return created_event_type
+        return {"ok": created_event_type}
