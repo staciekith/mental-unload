@@ -72,20 +72,20 @@ API using Python and Flask to get handy with these technologies.
 Following the principles of clean architecture / hexagonal architecture:
 - separate user side, business logic and server side
 - dependencies go to business logic (business logic does not depend on user side and server side)
-- layers are isolated by ports and adapters
+- layers are isolated by adapters
+
+### Entities
+Entities represent the domain objects with plain objects. They encapsulate the most general and high-level rules. They are the least likely to change when something external changes.
 
 ### Use cases / business logic
-Use cases are interactors. There is one use case for each individual action of an actor (person or system interacting with our application) -> one execute function.
+Use cases represent the business actions with pure business logic. They define interfaces for the data they need and throws business exceptions. They orchestrate the flow of data to and from the entities.
 They are to be used in APIs, cli commands, tasks, etc.
 
 ### Input DTOs
 Input DTOs are immutable data structure used as arguments in the use cases' function. DTOs should be validated before being passed to use cases.
 
-### Interfaces / ports (abstract classes)
-Interfaces are wrappers used to call a third party API or another component. This prevents the use cases / business logic to be polluted with irrelevant details and names.
-
 ### Interface adapters
-An adapter is just an implementation of an interface.
+Interface adapters are wrappers used to call a third party API or another component (e.g. databases). This prevents the use cases / business logic to be polluted with irrelevant details and names. They convert data from the format most convenient for the use cases and entities, to the format most convenient for external components.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -159,7 +159,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Automatically create a reminder when an event is created as done
 - [x] Create/update an event and even_type
 - [x] Validations
-- [ ] Errors management
+- [x] Errors management
 - [ ] Tests
 - [ ] Authentication / Authorization
 - [ ] API documentation

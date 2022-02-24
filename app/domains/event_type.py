@@ -26,7 +26,13 @@ class EventType:
 
     @classmethod
     def from_dict(self, d):
-        return self(**d)
+        self.id = d.get('id')
+        self.name = d.get('name')
+        self.description = d.get('description')
+        self.unit_label = d.get('unit_label')
+        self.unit_quantity = d.get('unit_quantity')
+        self.unit_duration = d.get('unit_duration')
+        self.reminder_delay = d.get('reminder_delay')
 
     def to_dict(self):
         return dataclasses.asdict(self)
