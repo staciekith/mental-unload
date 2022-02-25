@@ -5,13 +5,22 @@ run:
 	FLASK_ENV=development FLASK_APP=mental_unload flask run
 
 migration-init:
-	flask db init
+	FLASK_APP=mental_unload flask db init
 
 migration-gen:
-	flask db migrate
+	FLASK_APP=mental_unload flask db migrate
 
 migration-run:
-	flask db upgrade
+	FLASK_APP=mental_unload flask db upgrade
+
+freeze-req:
+	pip3 freeze > requirements.txt
+
+test:
+	python3 -m pytest tests/
+
+test-init:
+	FLASK_ENV=test FLASK_APP=mental_unload flask db migrate
 
 venv-create:
 	virtualenv .venv

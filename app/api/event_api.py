@@ -6,7 +6,6 @@ from app.use_cases.create_event import CreateEvent
 from app.use_cases.update_event import UpdateEvent
 from app.use_cases.delete_event import DeleteEvent
 from app.domains.event import Event
-from app.domains.event_type import EventType
 from app.domains.error import Error
 
 from flask import current_app as app

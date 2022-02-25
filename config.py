@@ -19,3 +19,4 @@ class Dev(Config):
 
 class Test(Config):
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = "postgresql://mental-unload-test:mental-unload-test@localhost/mental-unload-test"
