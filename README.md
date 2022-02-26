@@ -160,7 +160,9 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Create/update an event and even_type
 - [x] Validations
 - [x] Errors management
-- [ ] Tests
+- [x] Tests repositories
+- [ ] Tests use cases
+- [ ] Tests endpoints
 - [ ] Authentication / Authorization
 - [ ] API documentation
 
@@ -201,7 +203,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-KITH Stacie - [@staciekith](https://twitter.com/staciekith) - stae.dev@gmail.com
+KITH Stacie - [@orenjibean](https://twitter.com/orenjibean) - stae.dev@gmail.com
 
 Project Link: [https://github.com/staciekith/mental-unload](https://github.com/staciekith/mental-unload)
 
