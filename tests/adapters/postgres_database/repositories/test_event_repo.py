@@ -7,8 +7,6 @@ from app.adapters.postgres_database.models.event_type import EventType
 
 @pytest.fixture(scope='module')
 def init_db(app_db):
-    app_db.create_all()
-
     event_type = {
         'id': 1,
         'name': "event type 1",

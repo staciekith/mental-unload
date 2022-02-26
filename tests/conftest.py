@@ -6,10 +6,14 @@ from app import create_app, db
 def app():
     app = create_app(config.Test)
 
-    yield app
+    with app.app_context():
+        yield app
 
 @pytest.fixture(scope='module')
 def app_db(app):
+    db.drop_all()
+    db.create_all()
+
     with app.app_context():
         yield db
 
