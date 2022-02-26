@@ -4,6 +4,7 @@ from datetime import datetime
 from app.adapters.postgres_database.repositories.event_repo import EventRepo
 from app.adapters.postgres_database.models.event import Event
 from app.adapters.postgres_database.models.event_type import EventType
+import support.event_repo_data as data
 
 @pytest.fixture(scope='function')
 def init_db(app_db):
@@ -23,7 +24,7 @@ def init_db(app_db):
         'id': 1,
         'title': "event 1",
         'quantity': 1,
-        'done_at': datetime.now(),
+        'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,
         'status': "done",
@@ -34,7 +35,7 @@ def init_db(app_db):
         'id': 2,
         'title': "event 2",
         'quantity': 1,
-        'done_at': datetime.now(),
+        'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,
         'status': "done",
@@ -54,11 +55,10 @@ def test_list(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
         result = EventRepo.list()
-        event = result[0]
 
     # THEN
     assert 2 == len(result)
-    assert "event 1" == event.title
+    assert data.list_result() == result
 
 def test_find(app, init_db):
     # GIVEN/WHEN
@@ -67,8 +67,7 @@ def test_find(app, init_db):
         no_result = EventRepo.find(3)
 
     # THEN
-    assert None != existing_result
-    assert "event 1" == existing_result.title
+    assert data.find_result() == existing_result
     assert None == no_result
 
 def test_create(app, init_db):
@@ -76,7 +75,7 @@ def test_create(app, init_db):
     event = {
         'title': "event created",
         'quantity': 1,
-        'done_at': datetime.now(),
+        'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,
         'status': "done",
@@ -89,9 +88,7 @@ def test_create(app, init_db):
         created = EventRepo.create(event)
 
     # THEN
-    assert None != created
-    assert None != created.id
-    assert "event created" == created.title
+    assert data.create_result() == created
 
 def test_update(app, init_db):
     # GIVEN
@@ -99,7 +96,7 @@ def test_update(app, init_db):
         'id': 1,
         'title': "event updated",
         'quantity': 1,
-        'done_at': datetime.now(),
+        'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,
         'status': "done",
@@ -113,22 +110,17 @@ def test_update(app, init_db):
         refreshed_updated = EventRepo.find(1)
 
     # THEN
-    assert None != updated
-    assert 1 == updated.id
-    assert "event updated" == updated.title
-
-    assert None != refreshed_updated
-    assert 1 == refreshed_updated.id
-    assert "event updated" == refreshed_updated.title
+    assert data.update_result() == updated
+    assert data.update_result() == refreshed_updated
 
 def test_delete(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
         before_delete = EventRepo.find(2)
-        EventRepo.delete(2)
+        deleted = EventRepo.delete(2)
         after_delete = EventRepo.find(2)
 
     # THEN
-    assert None != before_delete
-    assert 2 == before_delete.id
+    assert data.delete_result() == before_delete
+    assert data.delete_result() == deleted
     assert None == after_delete

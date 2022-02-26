@@ -1,9 +1,8 @@
 import pytest
 import collections
-from datetime import datetime
 from app.adapters.postgres_database.repositories.event_type_repo import EventTypeRepo
-from app.adapters.postgres_database.models.event import Event
 from app.adapters.postgres_database.models.event_type import EventType
+import support.event_type_repo_data as data
 
 @pytest.fixture(scope='function')
 def init_db(app_db):
@@ -41,11 +40,10 @@ def test_list(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
         result = EventTypeRepo.list()
-        event_type = result[0]
 
     # THEN
     assert 2 == len(result)
-    assert "event type 1" == event_type.name
+    assert data.list_result() == result
 
 def test_find(app, init_db):
     # GIVEN/WHEN
@@ -54,8 +52,7 @@ def test_find(app, init_db):
         no_result = EventTypeRepo.find(3)
 
     # THEN
-    assert None != existing_result
-    assert "event type 1" == existing_result.name
+    assert data.find_result() == existing_result
     assert None == no_result
 
 def test_create(app, init_db):
@@ -75,9 +72,7 @@ def test_create(app, init_db):
         created = EventTypeRepo.create(event_type)
 
     # THEN
-    assert None != created
-    assert None != created.id
-    assert "event type created" == created.name
+    assert data.create_result() == created
 
 def test_update(app, init_db):
     # GIVEN
@@ -97,22 +92,17 @@ def test_update(app, init_db):
         refreshed_updated = EventTypeRepo.find(1)
 
     # THEN
-    assert None != updated
-    assert 1 == updated.id
-    assert "event type updated" == updated.name
-
-    assert None != refreshed_updated
-    assert 1 == refreshed_updated.id
-    assert "event type updated" == refreshed_updated.name
+    assert data.update_result() == updated
+    assert data.update_result() == refreshed_updated
 
 def test_delete(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
         before_delete = EventTypeRepo.find(2)
-        EventTypeRepo.delete(2)
+        deleted = EventTypeRepo.delete(2)
         after_delete = EventTypeRepo.find(2)
 
     # THEN
-    assert None != before_delete
-    assert 2 == before_delete.id
+    assert data.delete_result() == before_delete
+    assert data.delete_result() == deleted
     assert None == after_delete
