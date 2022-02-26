@@ -19,9 +19,6 @@ freeze-req:
 test:
 	python3 -m pytest tests/
 
-test-init:
-	FLASK_ENV=test FLASK_APP=mental_unload flask db migrate
-
 venv-create:
 	virtualenv .venv
 
