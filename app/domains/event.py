@@ -12,6 +12,16 @@ class Event:
     status: str
     type_id: int
 
+    def __init__(self, props):
+        self.id = props.get('id')
+        self.title = props.get('title')
+        self.quantity = props.get('quantity')
+        self.done_at = props.get('done_at')
+        self.due_at = props.get('due_at')
+        self.remind_at = props.get('remind_at')
+        self.status = props.get('status')
+        self.type_id = props.get('type_id')
+
     @classmethod
     def validate_fields(self, data):
         mandatory_fields = ["title", "quantity", "type_id"]
@@ -24,19 +34,6 @@ class Event:
                 missing_fields.append(mandatory_field)
 
         return missing_fields
-
-    @classmethod
-    def from_dict(self, d):
-        self.id = d.get('id')
-        self.title = d.get('title')
-        self.quantity = d.get('quantity')
-        self.done_at = d.get('done_at')
-        self.due_at = d.get('due_at')
-        self.remind_at = d.get('remind_at')
-        self.status = d.get('status')
-        self.type_id = d.get('type_id')
-
-        return self
 
     def to_dict(self):
         return dataclasses.asdict(self)

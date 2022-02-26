@@ -13,7 +13,7 @@ def find_result():
         'type_id': 1
     }
 
-    return Event(**event)
+    return Event(event)
 
 def list_result():
     event_1 = {
@@ -38,8 +38,8 @@ def list_result():
         'type_id': 1
     }
 
-    event_1 = Event(**event_1)
-    event_2 = Event(**event_2)
+    event_1 = Event(event_1)
+    event_2 = Event(event_2)
 
     return [event_1, event_2]
 
@@ -47,7 +47,7 @@ def create_result():
     event = {
         'id': 3,
         'title': "event created",
-        'quantity': 1,
+        'quantity': 2040,
         'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,
@@ -55,7 +55,7 @@ def create_result():
         'type_id': 1
     }
 
-    return Event(**event)
+    return Event(event)
 
 def update_result():
     event = {
@@ -69,7 +69,7 @@ def update_result():
         'type_id': 1
     }
 
-    return Event(**event)
+    return Event(event)
 
 def delete_result():
     event = {
@@ -83,4 +83,4 @@ def delete_result():
         'type_id': 1
     }
 
-    return Event(**event)
+    return Event(event)

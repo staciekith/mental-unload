@@ -11,6 +11,15 @@ class EventType:
     unit_duration: int
     reminder_delay: int
 
+    def __init__(self, props):
+        self.id = props.get('id')
+        self.name = props.get('name')
+        self.description = props.get('description')
+        self.unit_label = props.get('unit_label')
+        self.unit_quantity = props.get('unit_quantity')
+        self.unit_duration = props.get('unit_duration')
+        self.reminder_delay = props.get('reminder_delay')
+
     @classmethod
     def validate_fields(self, data):
         mandatory_fields = ["name", "description", "unit_label", "unit_quantity", "unit_duration", "reminder_delay"]
@@ -23,16 +32,6 @@ class EventType:
                 missing_fields.append(mandatory_field)
 
         return missing_fields
-
-    @classmethod
-    def from_dict(self, d):
-        self.id = d.get('id')
-        self.name = d.get('name')
-        self.description = d.get('description')
-        self.unit_label = d.get('unit_label')
-        self.unit_quantity = d.get('unit_quantity')
-        self.unit_duration = d.get('unit_duration')
-        self.reminder_delay = d.get('reminder_delay')
 
     def to_dict(self):
         return dataclasses.asdict(self)

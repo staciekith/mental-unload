@@ -8,7 +8,7 @@ class UpdateEvent:
             return {"error": "Event with ID " + str(id) + " does not exist"}
 
         data = event_to_update.to_dict() | data
-        event = Event.from_dict(data)
+        event = Event(data)
 
         updated_event = repo.update(id, event)
 

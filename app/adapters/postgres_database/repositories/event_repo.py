@@ -6,13 +6,13 @@ class EventRepo:
     def list(filters = None) -> List[Event]:
         results = EventModel.query.all()
 
-        return [Event(**row.serialize()) for row in results]
+        return [Event(row.serialize()) for row in results]
 
     def find(event_id: int) -> Event:
         event_model = EventModel.query.get(event_id)
 
         if (event_model):
-            return Event(**event_model.serialize())
+            return Event(event_model.serialize())
 
         return None
 
@@ -22,7 +22,7 @@ class EventRepo:
 
         event_model.id = created_event.id
 
-        return Event(**event_model.serialize())
+        return Event(event_model.serialize())
 
     def update(event_id: int, event: Event) -> Event:
         event_to_update = EventModel.query.get(event_id)
@@ -36,10 +36,10 @@ class EventRepo:
 
         event_to_update = EventModel.update(event_to_update)
 
-        return Event(**event_to_update.serialize())
+        return Event(event_to_update.serialize())
 
     def delete(event_id: int) -> None:
         event_to_delete = EventModel.query.get(event_id)
         event_to_delete = EventModel.delete(event_to_delete)
 
-        return Event(**event_to_delete.serialize())
+        return Event(event_to_delete.serialize())

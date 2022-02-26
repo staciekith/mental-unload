@@ -8,7 +8,7 @@ class UpdateEventType:
             return {"error": "EventType with ID " + str(id) + " does not exist"}
 
         data = event_type_to_update.to_dict() | data
-        event_type = EventType.from_dict(data)
+        event_type = EventType(data)
 
         updated_event_type = repo.update(id, event_type)
 

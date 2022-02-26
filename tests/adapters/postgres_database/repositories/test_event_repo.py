@@ -74,7 +74,7 @@ def test_create(app, init_db):
     # GIVEN
     event = {
         'title': "event created",
-        'quantity': 1,
+        'quantity': 2040,
         'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,

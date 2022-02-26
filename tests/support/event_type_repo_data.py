@@ -11,7 +11,7 @@ def find_result():
         'reminder_delay': 24
     }
 
-    return EventType(**event_type)
+    return EventType(event_type)
 
 def list_result():
     event_type = {
@@ -34,8 +34,8 @@ def list_result():
         'reminder_delay': 24
     }
 
-    event_type = EventType(**event_type)
-    event_type_2 = EventType(**event_type_2)
+    event_type = EventType(event_type)
+    event_type_2 = EventType(event_type_2)
 
     return [event_type, event_type_2]
 
@@ -50,7 +50,7 @@ def create_result():
         'reminder_delay': 24
     }
 
-    return EventType(**event_type)
+    return EventType(event_type)
 
 def update_result():
     event_type = {
@@ -63,7 +63,7 @@ def update_result():
         'reminder_delay': 24
     }
 
-    return EventType(**event_type)
+    return EventType(event_type)
 
 def delete_result():
     event_type = {
@@ -76,4 +76,4 @@ def delete_result():
         'reminder_delay': 24
     }
 
-    return EventType(**event_type)
+    return EventType(event_type)
