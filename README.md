@@ -161,8 +161,8 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Validations
 - [x] Errors management
 - [x] Tests repositories
-- [ ] Tests use cases
-- [ ] Tests endpoints
+- [x] Tests use cases
+- [x] Tests endpoints
 - [ ] Authentication / Authorization
 - [ ] API documentation
 

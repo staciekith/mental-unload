@@ -41,7 +41,7 @@ def post_events():
     if "error" in result.keys():
         return jsonify(result.get("error")), 400
 
-    return jsonify(result.get("ok"))
+    return jsonify(result.get("ok")), 201
 
 def get_events():
     result = ListEvents.execute(EventRepo)

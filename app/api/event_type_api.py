@@ -39,7 +39,7 @@ def post_event_types():
     if "error" in result.keys():
         return jsonify(result.get("error")), 400
 
-    return jsonify(result.get("ok"))
+    return jsonify(result.get("ok")), 201
 
 def get_event_types():
     result = ListEventTypes.execute(EventTypeRepo)
