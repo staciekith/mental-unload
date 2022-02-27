@@ -1,5 +1,6 @@
 from app.use_cases.delete_event_type import DeleteEventType
 import support.event_type_repo_data as repo_data
+import support.event_type_use_case_data as data
 from unittest.mock import Mock
 
 def test_execute():
@@ -16,7 +17,7 @@ def test_execute():
     repo_mock.find.assert_called_once_with(2)
     repo_mock.delete.assert_called_once()
     repo_mock.delete.assert_called_once_with(2)
-    assert {'ok': repo_data.delete_result()} == result
+    assert data.delete_result() == result
 
 def test_execute_when_not_found():
     # GIVEN
@@ -30,4 +31,4 @@ def test_execute_when_not_found():
     repo_mock.find.assert_called_once()
     repo_mock.find.assert_called_once_with(6)
     repo_mock.delete.assert_not_called()
-    assert {'error': "EventType with ID 6 does not exist"} == result
+    assert data.not_found_result(6) == result

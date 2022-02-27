@@ -1,5 +1,6 @@
 from app.use_cases.list_events import ListEvents
 import support.event_repo_data as repo_data
+import support.event_use_case_data as data
 from unittest.mock import Mock
 
 def test_execute():
@@ -12,4 +13,4 @@ def test_execute():
 
     # THEN
     repo_mock.list.assert_called_once()
-    assert {'ok': repo_data.list_result()} == result
+    assert data.list_result() == result
