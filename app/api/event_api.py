@@ -8,18 +8,18 @@ from app.use_cases.delete_event import DeleteEvent
 from app.domains.event import Event
 from app.domains.error import Error
 
-from flask import current_app as app
-from flask import jsonify
-from flask import request
+from flask import jsonify, request, Blueprint
 
-@app.route('/events', methods=['GET', 'POST'])
+event_api = Blueprint('event_api', __name__)
+
+@event_api.route('/events', methods=['GET', 'POST'])
 def events():
     if request.method == 'POST':
         return post_events()
     else:
         return get_events()
 
-@app.route('/events/<int:event_id>', methods=['DELETE', 'PUT'])
+@event_api.route('/events/<int:event_id>', methods=['DELETE', 'PUT'])
 def event(event_id):
     if request.method == 'DELETE':
         return delete_event(event_id)
