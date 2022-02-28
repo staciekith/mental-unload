@@ -165,6 +165,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Tests endpoints
 - [ ] Authentication / Authorization
 - [ ] API documentation
+- [ ] Logs ELK
 
 
 See the [open issues](https://github.com/staciekith/mental-unload/issues) for a full list of proposed features (and known issues).

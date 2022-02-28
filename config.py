@@ -9,6 +9,10 @@ class Config(object):
     SECRET_KEY = os.getenv('SECRET_KEY', 'mental-unload-2022-himeboshi')
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
+    AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
+    AUTH0_API_BASE_URL = os.getenv('AUTH0_API_BASE_URL')
+    AUTH0_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
 
 class Prod(Config):
     DEBUG = False
