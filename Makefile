@@ -19,6 +19,9 @@ freeze-req:
 test:
 	python3 -m pytest tests/
 
+coverage:
+	coverage run --omit="*/test*" -m pytest tests/ && coverage report
+
 venv-create:
 	virtualenv .venv
 
