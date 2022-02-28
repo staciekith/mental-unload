@@ -6,11 +6,11 @@ from authlib.integrations.flask_client import OAuth
 
 db = SQLAlchemy()
 migrate = Migrate(directory='app/adapters/postgres_database/migrations')
-oauth = OAuth()
 
 def create_app(config_object=Config):
     app = Flask(__name__)
     app.config.from_object(config_object)
+    oauth = OAuth()
 
     db.init_app(app)
     migrate.init_app(app, db)
