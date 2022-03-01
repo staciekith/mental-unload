@@ -2,7 +2,7 @@ from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from authlib.integrations.flask_client import OAuth
+from app.adapters.auth0.auth0_adapter import Auth0Adapter
 
 db = SQLAlchemy()
 migrate = Migrate(directory='app/adapters/postgres_database/migrations')
@@ -10,7 +10,7 @@ migrate = Migrate(directory='app/adapters/postgres_database/migrations')
 def create_app(config_object=Config):
     app = Flask(__name__)
     app.config.from_object(config_object)
-    oauth = OAuth()
+    oauth = Auth0Adapter()
 
     db.init_app(app)
     migrate.init_app(app, db)
@@ -23,18 +23,7 @@ def create_app(config_object=Config):
     }
 
     with app.app_context():
-        auth0 = oauth.register(
-            'auth0',
-            client_id=config_object.AUTH0_CLIENT_ID,
-            client_secret=config_object.AUTH0_CLIENT_SECRET,
-            api_base_url=config_object.AUTH0_API_BASE_URL,
-            access_token_url=config_object.AUTH0_API_BASE_URL + '/oauth/token',
-            authorize_url=config_object.AUTH0_API_BASE_URL + '/authorize',
-            client_kwargs={
-                'scope': 'openid profile email',
-            },
-        )
-        app.auth0 = auth0
+        app.auth0 = oauth.register_auth0(config_object)
 
         # Import parts of our application
         from app.adapters.postgres_database import models
