@@ -17,7 +17,8 @@ def init_db(app_db):
         'unit_label': "g",
         'unit_quantity': 170,
         'unit_duration': 12,
-        'reminder_delay': 24
+        'reminder_delay': 24,
+        'user': 'user1'
     }
 
     event_1 = {
@@ -28,7 +29,8 @@ def init_db(app_db):
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
     event_2 = {
@@ -39,12 +41,26 @@ def init_db(app_db):
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user2'
+    }
+
+    event_3 = {
+        'id': 3,
+        'title': "event 3",
+        'quantity': 1,
+        'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
+        'due_at': None,
+        'remind_at': None,
+        'status': "done",
+        'type_id': 1,
+        'user': 'user1'
     }
 
     app_db.session.add(EventType(collections.namedtuple("event_type", event_type.keys())(*event_type.values())))
     app_db.session.add(Event(collections.namedtuple("event", event_1.keys())(*event_1.values())))
     app_db.session.add(Event(collections.namedtuple("event", event_2.keys())(*event_2.values())))
+    app_db.session.add(Event(collections.namedtuple("event", event_3.keys())(*event_3.values())))
     app_db.session.commit()
 
     yield
@@ -54,7 +70,7 @@ def init_db(app_db):
 def test_list(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
-        result = EventRepo.list()
+        result = EventRepo.list('user1')
 
     # THEN
     assert 2 == len(result)
@@ -64,7 +80,7 @@ def test_find(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
         existing_result = EventRepo.find(1)
-        no_result = EventRepo.find(3)
+        no_result = EventRepo.find(4)
 
     # THEN
     assert data.find_result() == existing_result
@@ -79,7 +95,8 @@ def test_create(app, init_db):
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
     event = Event(collections.namedtuple("event", event.keys())(*event.values()))
 
@@ -100,7 +117,8 @@ def test_update(app, init_db):
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
     event = Event(collections.namedtuple("event", event.keys())(*event.values()))
 

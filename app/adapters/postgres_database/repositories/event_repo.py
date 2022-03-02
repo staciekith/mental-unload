@@ -3,8 +3,8 @@ from app.domains.event import Event
 from app.adapters.postgres_database.models import Event as EventModel
 
 class EventRepo:
-    def list(filters = None) -> List[Event]:
-        results = EventModel.query.all()
+    def list(user: str) -> List[Event]:
+        results = EventModel.query.filter_by(user=user)
 
         return [Event(row.serialize()) for row in results]
 

@@ -10,7 +10,8 @@ def find_result():
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
     return Event(event)
@@ -24,35 +25,38 @@ def list_result():
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
-    event_2 = {
-        'id': 2,
-        'title': "event 2",
+    event_3 = {
+        'id': 3,
+        'title': "event 3",
         'quantity': 1,
         'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
     event_1 = Event(event_1)
-    event_2 = Event(event_2)
+    event_3 = Event(event_3)
 
-    return [event_1, event_2]
+    return [event_1, event_3]
 
 def create_result():
     event = {
-        'id': 3,
+        'id': 4,
         'title': "event created",
         'quantity': 2040,
         'done_at': datetime(2022, 2, 10, 9, 30, 0, 0),
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
     return Event(event)
@@ -66,7 +70,8 @@ def update_result():
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
     return Event(event)
@@ -80,7 +85,8 @@ def delete_result():
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user2'
     }
 
     return Event(event)

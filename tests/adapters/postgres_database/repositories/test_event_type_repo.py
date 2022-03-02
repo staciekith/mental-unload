@@ -15,7 +15,8 @@ def init_db(app_db):
         'unit_label': "g",
         'unit_quantity': 170,
         'unit_duration': 12,
-        'reminder_delay': 24
+        'reminder_delay': 24,
+        'user': 'user1'
     }
 
     event_type_2 = {
@@ -25,11 +26,24 @@ def init_db(app_db):
         'unit_label': "g",
         'unit_quantity': 170,
         'unit_duration': 12,
-        'reminder_delay': 24
+        'reminder_delay': 24,
+        'user': 'user2'
+    }
+
+    event_type_3 = {
+        'id': 3,
+        'name': "event type 3",
+        'description': "event type 3",
+        'unit_label': "g",
+        'unit_quantity': 170,
+        'unit_duration': 12,
+        'reminder_delay': 24,
+        'user': 'user1'
     }
 
     app_db.session.add(EventType(collections.namedtuple("event_type", event_type.keys())(*event_type.values())))
     app_db.session.add(EventType(collections.namedtuple("event_type", event_type_2.keys())(*event_type_2.values())))
+    app_db.session.add(EventType(collections.namedtuple("event_type", event_type_3.keys())(*event_type_3.values())))
     app_db.session.commit()
 
     yield
@@ -39,7 +53,7 @@ def init_db(app_db):
 def test_list(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
-        result = EventTypeRepo.list()
+        result = EventTypeRepo.list('user1')
 
     # THEN
     assert 2 == len(result)
@@ -49,7 +63,7 @@ def test_find(app, init_db):
     # GIVEN/WHEN
     with app.app_context():
         existing_result = EventTypeRepo.find(1)
-        no_result = EventTypeRepo.find(3)
+        no_result = EventTypeRepo.find(4)
 
     # THEN
     assert data.find_result() == existing_result
@@ -63,7 +77,8 @@ def test_create(app, init_db):
         'unit_label': "g",
         'unit_quantity': 170,
         'unit_duration': 12,
-        'reminder_delay': 24
+        'reminder_delay': 24,
+        'user': 'user1'
     }
     event_type = EventType(collections.namedtuple("event_type", event_type.keys())(*event_type.values()))
 
@@ -82,7 +97,8 @@ def test_update(app, init_db):
         'unit_label': "g",
         'unit_quantity': 170,
         'unit_duration': 12,
-        'reminder_delay': 24
+        'reminder_delay': 24,
+        'user': 'user1'
     }
     event_type = EventType(collections.namedtuple("event_type", event_type.keys())(*event_type.values()))
 
