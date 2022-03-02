@@ -19,6 +19,9 @@ freeze-req:
 test:
 	python3 -m pytest tests/
 
+test-path:
+	python3 -m pytest $(path)
+
 coverage:
 	coverage run --omit="*/test*" -m pytest tests/ && coverage report
 

@@ -3,6 +3,7 @@ import dataclasses
 @dataclasses.dataclass
 class EventType:
     id: int
+    user: str
     name: str
     description: str
     unit_label: str
@@ -12,6 +13,7 @@ class EventType:
 
     def __init__(self, props):
         self.id = props.get('id')
+        self.user = props.get('user')
         self.name = props.get('name')
         self.description = props.get('description')
         self.unit_label = props.get('unit_label')
@@ -21,7 +23,7 @@ class EventType:
 
     @classmethod
     def validate_fields(self, data):
-        mandatory_fields = ["name", "description", "unit_label", "unit_quantity", "unit_duration", "reminder_delay"]
+        mandatory_fields = ["user", "name", "description", "unit_label", "unit_quantity", "unit_duration", "reminder_delay"]
         data_fields = data.keys()
 
         missing_fields = []

@@ -4,6 +4,7 @@ class EventType(db.Model):
     __tablename__ = 'event_type'
 
     id = db.Column(db.Integer, primary_key=True)
+    user=db.Column(db.String(), nullable=False)
     name = db.Column(db.String(), nullable=False)
     description = db.Column(db.Text)
     unit_label = db.Column(db.String(), nullable=False)
@@ -13,6 +14,7 @@ class EventType(db.Model):
     events = db.relationship('Event', backref=db.backref('type', lazy=True))
 
     def __init__(self, props):
+        self.user = props.user
         self.name = props.name
         self.description = props.description
         self.unit_label = props.unit_label
@@ -26,6 +28,7 @@ class EventType(db.Model):
     def serialize(self):
         return {
             'id': self.id,
+            'user': self.user,
             'name': self.name,
             'description': self.description,
             'unit_label': self.unit_label,

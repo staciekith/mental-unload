@@ -4,6 +4,7 @@ import datetime
 @dataclasses.dataclass
 class Event:
     id: int
+    user: str
     title: str
     quantity: int
     done_at: datetime
@@ -14,6 +15,7 @@ class Event:
 
     def __init__(self, props):
         self.id = props.get('id')
+        self.user = props.get('user')
         self.title = props.get('title')
         self.quantity = props.get('quantity')
         self.done_at = props.get('done_at')
@@ -24,7 +26,7 @@ class Event:
 
     @classmethod
     def validate_fields(self, data):
-        mandatory_fields = ["title", "quantity", "type_id"]
+        mandatory_fields = ["user", "title", "quantity", "type_id"]
         data_fields = data.keys()
 
         missing_fields = []

@@ -4,6 +4,7 @@ class Event(db.Model):
     __tablename__ = 'event'
 
     id = db.Column(db.Integer, primary_key=True)
+    user=db.Column(db.String(), nullable=False)
     title = db.Column(db.String(), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     done_at = db.Column(db.DateTime)
@@ -13,6 +14,7 @@ class Event(db.Model):
     type_id = db.Column(db.Integer, db.ForeignKey('event_type.id'), nullable=False)
 
     def __init__(self, props):
+        self.user = props.user
         self.title = props.title
         self.quantity = props.quantity
         self.done_at = props.done_at
@@ -27,6 +29,7 @@ class Event(db.Model):
     def serialize(self):
         return {
             'id': self.id,
+            'user': self.user,
             'title': self.title,
             'quantity': self.quantity,
             'done_at': self.done_at,
