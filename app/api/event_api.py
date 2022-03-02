@@ -8,7 +8,7 @@ from app.use_cases.delete_event import DeleteEvent
 from app.domains.event import Event
 from app.domains.error import Error
 
-from flask import jsonify, request, Blueprint
+from flask import jsonify, request, Blueprint, session
 
 event_api = Blueprint('event_api', __name__)
 
@@ -28,6 +28,7 @@ def event(event_id):
 
 def post_events():
     request_data = request.get_json()
+    request_data['user'] = session['user']
 
     missing_fields = Event.validate_fields(request_data)
 
@@ -44,7 +45,7 @@ def post_events():
     return jsonify(result.get("ok")), 201
 
 def get_events():
-    result = ListEvents.execute(EventRepo)
+    result = ListEvents.execute(EventRepo, session['user'])
 
     if "error" in result.keys():
         return jsonify(result.get("error")), 400

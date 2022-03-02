@@ -37,7 +37,8 @@ class CreateEvent:
             "done_at": None,
             "status": "pending",
             "due_at": due_at,
-            "remind_at": remind_at
+            "remind_at": remind_at,
+            'user': created_event.user
         }
 
         reminder = Event(reminder)

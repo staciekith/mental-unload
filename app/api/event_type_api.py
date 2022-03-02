@@ -7,7 +7,7 @@ from app.domains.event_type import EventType
 from app.domains.error import Error
 from app.api.auth_middleware import requires_auth
 
-from flask import jsonify, request, Blueprint
+from flask import jsonify, request, Blueprint, session
 
 event_type_api = Blueprint('event_type_api', __name__)
 
@@ -28,6 +28,7 @@ def event_type(event_type_id):
 
 def post_event_types():
     request_data = request.get_json()
+    request_data['user'] = session['user']
 
     missing_fields = EventType.validate_fields(request_data)
 
@@ -44,7 +45,7 @@ def post_event_types():
     return jsonify(result.get("ok")), 201
 
 def get_event_types():
-    result = ListEventTypes.execute(EventTypeRepo)
+    result = ListEventTypes.execute(EventTypeRepo, session['user'])
 
     if "error" in result.keys():
         return jsonify(result.get("error")), 400

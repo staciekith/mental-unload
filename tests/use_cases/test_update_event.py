@@ -19,6 +19,7 @@ def test_execute():
     }
 
     expected_repo_param = Event(params)
+    expected_repo_param.user = 'user1'
 
     repo_mock = Mock()
     repo_mock.find.return_value = repo_data.find_result()

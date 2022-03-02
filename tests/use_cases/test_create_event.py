@@ -15,7 +15,8 @@ def test_execute():
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
     expected_repo_param = Event(params)
@@ -27,7 +28,8 @@ def test_execute():
         'due_at': datetime(2022, 2, 16, 3, 0, 0, 0),
         'remind_at': datetime(2022, 2, 15, 3, 0, 0, 0),
         'status': "pending",
-        'type_id': 1
+        'type_id': 1,
+        'user': 'user1'
     }
 
     expected_reminder_repo_param = Event(reminder_params)
@@ -62,7 +64,8 @@ def execute_when_event_type_not_found():
         'due_at': None,
         'remind_at': None,
         'status': "done",
-        'type_id': 6
+        'type_id': 6,
+        'user': 'user1'
     }
 
     event_type_repo_mock = Mock()

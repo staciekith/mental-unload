@@ -9,7 +9,7 @@ def test_execute():
     repo_mock.list.return_value = repo_data.list_result()
 
     # WHEN
-    result = ListEvents.execute(repo_mock)
+    result = ListEvents.execute(repo_mock, 'user1')
 
     # THEN
     repo_mock.list.assert_called_once()

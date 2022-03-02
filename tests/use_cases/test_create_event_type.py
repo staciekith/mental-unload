@@ -12,7 +12,8 @@ def test_execute():
         'unit_label': "g",
         'unit_quantity': 170,
         'unit_duration': 12,
-        'reminder_delay': 24
+        'reminder_delay': 24,
+        'user': 'user1'
     }
 
     expected_repo_param = EventType(params)
