@@ -7,12 +7,13 @@ from app.use_cases.update_event import UpdateEvent
 from app.use_cases.delete_event import DeleteEvent
 from app.domains.event import Event
 from app.domains.error import Error
-
+from app.api.auth_middleware import requires_auth
 from flask import jsonify, request, Blueprint, session
 
 event_api = Blueprint('event_api', __name__)
 
 @event_api.route('/events', methods=['GET', 'POST'])
+@requires_auth
 def events():
     if request.method == 'POST':
         return post_events()
@@ -20,6 +21,7 @@ def events():
         return get_events()
 
 @event_api.route('/events/<int:event_id>', methods=['DELETE', 'PUT'])
+@requires_auth
 def event(event_id):
     if request.method == 'DELETE':
         return delete_event(event_id)

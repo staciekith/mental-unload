@@ -20,6 +20,7 @@ def event_types():
         return get_event_types()
 
 @event_type_api.route('/event_types/<int:event_type_id>', methods=['DELETE', 'PUT'])
+@requires_auth
 def event_type(event_type_id):
     if request.method == 'DELETE':
         return delete_event_type(event_type_id)

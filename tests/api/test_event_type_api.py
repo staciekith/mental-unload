@@ -4,9 +4,9 @@ from app.use_cases.update_event_type import UpdateEventType
 import support.event_type_use_case_data as data
 import json
 
-def test_get_event_types(client, monkeypatch):
+def test_get_event_types(client, monkeypatch, auth):
     # GIVEN
-    def use_case_return(_):
+    def use_case_return(_repo, _user):
         return data.list_result()
 
     monkeypatch.setattr(ListEventTypes, "execute", use_case_return)
@@ -14,13 +14,13 @@ def test_get_event_types(client, monkeypatch):
     expected = list(map(lambda event_type: event_type.to_dict(), data.list_result()["ok"]))
 
     # WHEN
-    response = client.get("/event_types")
+    response = client.get("/event_types", headers={'Authorization': 'Bearer token'})
 
     # THEN
     assert 200 == response.status_code
     assert expected == response.json
 
-def test_post_event_types(client, monkeypatch):
+def test_post_event_types(client, monkeypatch, auth):
     # GIVEN
     def use_case_return(_repo, _data):
         return data.create_result()
@@ -41,14 +41,15 @@ def test_post_event_types(client, monkeypatch):
     response = client.post(
         "/event_types",
         data=json.dumps(params),
-        content_type='application/json'
+        content_type='application/json',
+        headers={'Authorization': 'Bearer token'}
     )
 
     # THEN
     assert 201 == response.status_code
     assert expected == response.json
 
-def test_post_event_types_with_missing_fields(client, monkeypatch):
+def test_post_event_types_with_missing_fields(client, monkeypatch, auth):
     # GIVEN
     params = {}
     expected = {
@@ -69,14 +70,15 @@ def test_post_event_types_with_missing_fields(client, monkeypatch):
     response = client.post(
         "/event_types",
         data=json.dumps(params),
-        content_type='application/json'
+        content_type='application/json',
+        headers={'Authorization': 'Bearer token'}
     )
 
     # THEN
     assert 400 == response.status_code
     assert expected == response.json
 
-def test_put_event_type(client, monkeypatch):
+def test_put_event_type(client, monkeypatch, auth):
     # GIVEN
     def use_case_return(_repo, _id, _data):
         return data.update_result()
@@ -97,7 +99,8 @@ def test_put_event_type(client, monkeypatch):
     response = client.put(
         "/event_types/1",
         data=json.dumps(params),
-        content_type='application/json'
+        content_type='application/json',
+        headers={'Authorization': 'Bearer token'}
     )
 
     # THEN

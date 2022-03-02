@@ -4,9 +4,9 @@ from app.use_cases.update_event import UpdateEvent
 import support.event_use_case_data as data
 import json
 
-def test_get_events(client, monkeypatch):
+def test_get_events(client, monkeypatch, auth):
     # GIVEN
-    def use_case_return(_):
+    def use_case_return(_repo, _user):
         return data.list_result()
 
     monkeypatch.setattr(ListEvents, "execute", use_case_return)
@@ -20,13 +20,13 @@ def test_get_events(client, monkeypatch):
     expected = list(map(map_function, data.list_result()["ok"]))
 
     # WHEN
-    response = client.get("/events")
+    response = client.get("/events", headers={'Authorization': 'Bearer token'})
 
     # THEN
     assert 200 == response.status_code
     assert expected == response.json
 
-def test_post_events(client, monkeypatch):
+def test_post_events(client, monkeypatch, auth):
     # GIVEN
     def use_case_return(_event_repo, _event_type_repo, _data):
         return data.create_result()
@@ -45,14 +45,15 @@ def test_post_events(client, monkeypatch):
     response = client.post(
         "/events",
         data=json.dumps(params),
-        content_type='application/json'
+        content_type='application/json',
+        headers={'Authorization': 'Bearer token'}
     )
 
     # THEN
     assert 201 == response.status_code
     assert expected == response.json
 
-def test_post_events_with_missing_fields(client, monkeypatch):
+def test_post_events_with_missing_fields(client, monkeypatch, auth):
     # GIVEN
     params = {}
     expected = {
@@ -70,14 +71,15 @@ def test_post_events_with_missing_fields(client, monkeypatch):
     response = client.post(
         "/events",
         data=json.dumps(params),
-        content_type='application/json'
+        content_type='application/json',
+        headers={'Authorization': 'Bearer token'}
     )
 
     # THEN
     assert 400 == response.status_code
     assert expected == response.json
 
-def test_put_event(client, monkeypatch):
+def test_put_event(client, monkeypatch, auth):
     # GIVEN
     def use_case_return(_repo, _id, _data):
         return data.update_result()
@@ -96,7 +98,8 @@ def test_put_event(client, monkeypatch):
     response = client.put(
         "/events/1",
         data=json.dumps(params),
-        content_type='application/json'
+        content_type='application/json',
+        headers={'Authorization': 'Bearer token'}
     )
 
     # THEN
