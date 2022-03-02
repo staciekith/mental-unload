@@ -5,12 +5,14 @@ from app.use_cases.update_event_type import UpdateEventType
 from app.use_cases.delete_event_type import DeleteEventType
 from app.domains.event_type import EventType
 from app.domains.error import Error
+from app.api.auth_middleware import requires_auth
 
 from flask import jsonify, request, Blueprint
 
 event_type_api = Blueprint('event_type_api', __name__)
 
 @event_type_api.route('/event_types', methods=['GET', 'POST'])
+@requires_auth
 def event_types():
     if request.method == 'POST':
         return post_event_types()

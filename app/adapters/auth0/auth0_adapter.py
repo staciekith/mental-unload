@@ -1,6 +1,10 @@
 from typing import Any
+from urllib.request import urlopen
 from authlib.integrations.flask_client import OAuth
 from urllib.parse import urlencode
+import json
+from jose import jwt
+from app.exceptions.auth_exception import AuthException
 
 class Auth0Adapter:
     oauth: OAuth
@@ -49,3 +53,50 @@ class Auth0Adapter:
         }
 
         return result
+
+    def verify_token(self, token):
+        jsonurl = urlopen(self.config.AUTH0_API_BASE_URL + '/.well-known/jwks.json')
+        jwks = json.loads(jsonurl.read())
+        unverified_header = jwt.get_unverified_header(token)
+        rsa_key = {}
+        for key in jwks["keys"]:
+            if key["kid"] == unverified_header["kid"]:
+                rsa_key = {
+                    "kty": key["kty"],
+                    "kid": key["kid"],
+                    "use": key["use"],
+                    "n": key["n"],
+                    "e": key["e"]
+                }
+
+        if rsa_key:
+            try:
+                payload = jwt.decode(
+                    token,
+                    rsa_key,
+                    algorithms=["RS256"],
+                    audience=self.config.AUTH0_AUDIENCE,
+                    issuer=self.config.AUTH0_API_BASE_URL + '/'
+                )
+            except jwt.ExpiredSignatureError:
+                raise AuthException({
+                    "code": "token_expired",
+                    "description": "Token is expired."
+                }, 401)
+            except jwt.JWTClaimsError:
+                raise AuthException({
+                    "code": "invalid_claims",
+                    "description": "Incorrect claims, please check the audience and issuer."
+                }, 401)
+            except Exception:
+                raise AuthException({
+                    "code": "invalid_header",
+                    "description": "Unable to parse authentication token."
+                    }, 401)
+
+            return payload
+
+        raise AuthException({
+            "code": "invalid_header",
+            "description": "Unable to find appropriate key."
+        }, 401)

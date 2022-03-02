@@ -3,6 +3,8 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app.adapters.auth0.auth0_adapter import Auth0Adapter
+from app.exceptions.auth_exception import AuthException
+from app.api.auth_exception_handler import handle_auth_error
 
 db = SQLAlchemy()
 migrate = Migrate(directory='app/adapters/postgres_database/migrations')
@@ -18,6 +20,9 @@ def create_app(config_object=Config):
 
     with app.app_context():
         auth0.register_auth0(config_object)
+
+        app.register_error_handler(AuthException, handle_auth_error)
+
         # Import parts of our application
         from app.adapters.postgres_database import models
         from app.api.event_type_api import event_type_api
@@ -27,6 +32,5 @@ def create_app(config_object=Config):
         app.register_blueprint(event_type_api)
         app.register_blueprint(event_api)
         app.register_blueprint(auth_api)
-
 
         return app
