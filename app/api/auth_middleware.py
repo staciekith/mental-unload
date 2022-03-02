@@ -2,7 +2,7 @@ from app.exceptions.auth_exception import AuthException
 from functools import wraps
 from app import auth0
 from flask import request
-from flask import _request_ctx_stack
+from flask import session
 
 def get_token_from_headers(headers):
     auth = headers.get("Authorization", None)
@@ -42,7 +42,7 @@ def requires_auth(f):
     def decorated(*args, **kwargs):
         token = get_token_from_headers(request.headers)
         payload = auth0.verify_token(token)
-        _request_ctx_stack.top.current_user = payload
+        session['user'] = payload['sub']
 
         return f(*args, **kwargs)
     return decorated
