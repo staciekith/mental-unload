@@ -26,7 +26,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: ./docker/python/Dockerfile
+      dockerfile: ./docker/python/Dockerfile.dev
     depends_on:
       - postgresql
     volumes:

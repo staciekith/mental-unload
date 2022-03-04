@@ -131,6 +131,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    make init
    ```
+4. The API is available on on `http://localhost`
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
