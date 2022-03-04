@@ -7,7 +7,7 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = os.getenv('SECRET_KEY', 'mental-unload-2022-himeboshi')
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{os.getenv('DATABASE_USER')}:{os.getenv('DATABASE_PASS')}@{os.getenv('DATABASE_HOST')}/{os.getenv('DATABASE_DATABASE')}"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
     AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
@@ -23,7 +23,7 @@ class Dev(Config):
 
 class Test(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "postgresql://mental-unload-test:mental-unload-test@localhost/mental-unload-test"
+    SQLALCHEMY_DATABASE_URI = "postgresql://mental-unload-test:mental-unload-test@postgresql-test/mental-unload-test"
     AUTH0_CLIENT_ID = ''
     AUTH0_CLIENT_SECRET = ''
     AUTH0_API_BASE_URL = ''

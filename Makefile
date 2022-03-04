@@ -1,4 +1,4 @@
-init: dc-up db-upgrade
+init: dc-up db-upgrade test-db-upgrade
 
 dc-up:
 	docker-compose -f docker-compose.dev.yml up -d --build
@@ -15,41 +15,30 @@ d-prune:
 
 # Apply the existing migrations if not already done
 db-upgrade:
-	docker-compose -f docker-compose.dev.yml exec api flask db migrate
+	docker-compose -f docker-compose.dev.yml exec api flask db upgrade
 
 # Create migration files if there are changes
 db-migrate:
 	docker-compose -f docker-compose.dev.yml exec api flask db migrate
 
-req:
-	pip3 install -r requirements.txt
-
-run:
-	flask run
-
-migration-init:
-	flask db init
-
-migration-gen:
-	flask db migrate
-
-migration-run:
-	flask db upgrade
-
 freeze-req:
-	pip3 freeze > requirements.txt
+	docker-compose -f docker-compose.dev.yml exec pip3 freeze > requirements.txt
 
 test:
-	python3 -m pytest tests/
+	docker-compose -f docker-compose.dev.yml exec api python3 -m pytest tests/
 
 test-path:
-	python3 -m pytest $(path)
+	docker-compose -f docker-compose.dev.yml exec api python3 -m pytest $(path)
+
+test-db-upgrade:
+	docker-compose -f docker-compose.dev.yml exec --env FLASK_ENV=test api flask db upgrade
 
 coverage:
-	coverage run --omit="*/test*" -m pytest tests/ && coverage report
+	docker-compose -f docker-compose.dev.yml exec api coverage run --omit="*/test*" -m pytest tests/
+	docker-compose -f docker-compose.dev.yml exec api coverage report
 
-venv-create:
-	virtualenv .venv
+# venv-create:
+# 	virtualenv .venv
 
 # venv-on:
 # 	source .venv/bin/activate.fish

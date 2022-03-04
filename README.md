@@ -107,13 +107,8 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-* pip3
-* python3
-* postgresql database
-* virtualenv
-  ```sh
-  pip3 install virtualenv
-  ```
+* docker
+* docker-compose
 
 ### Installation
 
@@ -121,22 +116,20 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    git clone https://github.com/staciekith/mental-unload.git
    ```
-2. Create a virtual environment for your project
-   ```sh
-   make venv-create
-   ```
-3. Install Python packages
-   ```sh
-   make req
-   ```
-4. Create a `.env` file
+2. Create a `.env` file from `.env.dist`
    ```.env
-   DATABASE_URL="postgresql://my-db-host/my-db-name"
+  DATABASE_HOST="host"
+  DATABASE_USER="user"
+  DATABASE_PASS="pass"
+  DATABASE_DATABASE="mental-unload"
+  AUTH0_CLIENT_ID=""
+  AUTH0_CLIENT_SECRET=""
+  AUTH0_API_BASE_URL=""
+  AUTH0_AUDIENCE=""
    ```
-5. Initialize and run the project
+3. Initialize and run the project
    ```sh
-   make migration-gen
-   make run
+   make init
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -164,7 +157,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Tests use cases
 - [x] Tests endpoints
 - [x] Authentication / Authorization
-- [ ] Dockerize
+- [x] Dockerize
 - [ ] Deployment
 - [ ] API documentation
 - [ ] Logs ELK

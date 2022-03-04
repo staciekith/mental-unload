@@ -8,9 +8,19 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_NAME=mental-unload
-      - POSTGRES_USER=mental-unload
-      - POSTGRES_PASSWORD=mental-unload
+      - POSTGRES_NAME=${DATABASE_DATABASE}
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASS}
+    networks:
+      - default
+  postgresql-test:
+    image: postgres:14
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_NAME=mental-unload-test
+      - POSTGRES_USER=mental-unload-test
+      - POSTGRES_PASSWORD=mental-unload-test
     networks:
       - default
   api:
@@ -21,6 +31,7 @@ services:
       - postgresql
     volumes:
       - ./app:/var/www/flask/app
+      - ./tests:/var/www/flask/tests
       - ./requirements.txt:/var/www/flask/requirements.txt
       - ./mental_unload.py:/var/www/flask/mental_unload.py
       - ./config.py:/var/www/flask/config.py
