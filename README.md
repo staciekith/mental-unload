@@ -118,14 +118,14 @@ To get a local copy up and running follow these simple example steps.
    ```
 2. Create a `.env` file from `.env.dist`
    ```.env
-  DATABASE_HOST="host"
-  DATABASE_USER="user"
-  DATABASE_PASS="pass"
-  DATABASE_DATABASE="mental-unload"
-  AUTH0_CLIENT_ID=""
-  AUTH0_CLIENT_SECRET=""
-  AUTH0_API_BASE_URL=""
-  AUTH0_AUDIENCE=""
+    DATABASE_HOST="host"
+    DATABASE_USER="user"
+    DATABASE_PASS="pass"
+    DATABASE_DATABASE="mental-unload"
+    AUTH0_CLIENT_ID=""
+    AUTH0_CLIENT_SECRET=""
+    AUTH0_API_BASE_URL=""
+    AUTH0_AUDIENCE=""
    ```
 3. Initialize and run the project
    ```sh
