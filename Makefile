@@ -1,17 +1,40 @@
+init: dc-up db-upgrade
+
+dc-up:
+	docker-compose -f docker-compose.dev.yml up -d --build
+
+dc-down:
+	docker-compose -f docker-compose.dev.yml down
+
+dc-exec-api:
+	docker-compose -f docker-compose.dev.yml exec api $(cmd)
+
+# Remove all stopped containers
+d-prune:
+	docker container prune
+
+# Apply the existing migrations if not already done
+db-upgrade:
+	docker-compose -f docker-compose.dev.yml exec api flask db migrate
+
+# Create migration files if there are changes
+db-migrate:
+	docker-compose -f docker-compose.dev.yml exec api flask db migrate
+
 req:
 	pip3 install -r requirements.txt
 
 run:
-	FLASK_ENV=development FLASK_APP=mental_unload flask run
+	flask run
 
 migration-init:
-	FLASK_APP=mental_unload flask db init
+	flask db init
 
 migration-gen:
-	FLASK_APP=mental_unload flask db migrate
+	flask db migrate
 
 migration-run:
-	FLASK_APP=mental_unload flask db upgrade
+	flask db upgrade
 
 freeze-req:
 	pip3 freeze > requirements.txt
@@ -32,4 +55,4 @@ venv-create:
 # 	source .venv/bin/activate.fish
 
 # venv-off:
-# 	. deactivate
+# 	deactivate

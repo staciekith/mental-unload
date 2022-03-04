@@ -163,7 +163,9 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Tests repositories
 - [x] Tests use cases
 - [x] Tests endpoints
-- [ ] Authentication / Authorization
+- [x] Authentication / Authorization
+- [ ] Dockerize
+- [ ] Deployment
 - [ ] API documentation
 - [ ] Logs ELK
 

@@ -1,0 +1,6 @@
+**
+!/app/**
+!/config.py
+!/mental_unload.py
+!/requirements.txt
+!/.env
