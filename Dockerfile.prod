@@ -20,6 +20,7 @@ ENV FLASK_ENV=production
 ENV FLASK_APP=mental_unload
 # ENV FLASK_RUN_PORT=$PORT
 # ENV FLASK_RUN_PORT=42923
+RUN export FLASK_RUN_PORT=$PORT
 
 RUN pip3 install -r requirements.txt
 

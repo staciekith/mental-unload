@@ -17,7 +17,6 @@ class Config(object):
 class Prod(Config):
     print('TOTO')
     print(os.getenv('PORT'))
-    FLASK_RUN_PORT=os.getenv('PORT')
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1) if os.getenv('DATABASE_URL').startswith("postgres://") else os.getenv('DATABASE_URL')
 
