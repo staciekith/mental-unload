@@ -8,6 +8,6 @@ build:
 release:
   image: web
   command:
-    - ./deploy.sh
+    - ./deploy-run-migrations.sh
 # run:
 #   web: python3 -m flask run --host=0.0.0.0
