@@ -10,6 +10,7 @@ COPY ./app /var/www/flask/app
 COPY ./requirements.txt /var/www/flask/requirements.txt
 COPY ./mental_unload.py /var/www/flask/mental_unload.py
 COPY ./config.py /var/www/flask/config.py
+COPY ./scripts/deploy.sh /var/www/flask/deploy.sh
 
 ENV FLASK_ENV=production
 ENV FLASK_APP=mental_unload
