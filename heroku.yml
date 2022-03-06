@@ -7,6 +7,7 @@ build:
     web: ./docker/python/Dockerfile.prod
 release:
   image: web
-  command: ./scripts/deploy.sh
-run:
-  web: python3 -m flask run --host=0.0.0.0
+  command:
+    - ./scripts/deploy.sh
+# run:
+#   web: python3 -m flask run --host=0.0.0.0
