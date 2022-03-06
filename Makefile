@@ -1,5 +1,8 @@
 init: dc-up db-upgrade test-db-upgrade
 
+deploy:
+	git push heroku main
+
 dc-up:
 	docker-compose -f docker-compose.dev.yml up -d --build
 
