@@ -8,6 +8,6 @@ build:
 release:
   image: web
   command:
-    - ./scripts/deploy.sh
+    - flask db migrate
 # run:
 #   web: python3 -m flask run --host=0.0.0.0
