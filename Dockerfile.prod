@@ -19,7 +19,7 @@ COPY ./deploy-run-migrations.sh /var/www/flask/deploy-run-migrations.sh
 ENV FLASK_ENV=production
 ENV FLASK_APP=mental_unload
 # ENV FLASK_RUN_PORT=$PORT
-ENV FLASK_RUN_PORT=42923
+# ENV FLASK_RUN_PORT=42923
 
 RUN pip3 install -r requirements.txt
 
