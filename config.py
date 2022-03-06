@@ -15,7 +15,7 @@ class Config(object):
     AUTH0_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
 
 class Prod(Config):
-    print(os.getenv('FLASK_RUN_PORT'))
+    print(os.getenv('PORT'))
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL').replace("postgres://", "postgresql://", 1) if os.getenv('DATABASE_URL').startswith("postgres://") else os.getenv('DATABASE_URL')
 
