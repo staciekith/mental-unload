@@ -4,7 +4,7 @@ setup:
       as: DATABASE
 build:
   docker:
-    web: ./docker/python/Dockerfile.prod
+    web: ./Dockerfile.prod
 release:
   image: web
   command:
