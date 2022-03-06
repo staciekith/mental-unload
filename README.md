@@ -159,7 +159,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Tests endpoints
 - [x] Authentication / Authorization
 - [x] Dockerize
-- [ ] Deployment
+- [x] Deployment
 - [ ] API documentation
 - [ ] Logs ELK
 

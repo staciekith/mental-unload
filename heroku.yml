@@ -9,5 +9,3 @@ release:
   image: web
   command:
     - ./deploy-run-migrations.sh
-# run:
-#   web: python3 -m flask run --host=0.0.0.0
