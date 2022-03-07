@@ -21,10 +21,10 @@
   <p align="center">
     Free your mind from daily tasks.
     <br />
-    <a href="https://github.com/staciekith/mental-unload"><strong>Explore the docs »</strong></a>
+    <a href="https://mental-unload-api.herokuapp.com"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/staciekith/mental-unload">View Demo</a>
+    <a href="https://mental-unload-api.herokuapp.com">View Demo</a>
     ·
     <a href="https://github.com/staciekith/mental-unload/issues">Report Bug</a>
     ·
@@ -160,7 +160,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Authentication / Authorization
 - [x] Dockerize
 - [x] Deployment
-- [ ] API documentation
+- [x] API documentation
 - [ ] Logs ELK
 
 
@@ -202,7 +202,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 KITH Stacie - [@orenjibean](https://twitter.com/orenjibean) - stae.dev@gmail.com
 
-Project Link: [https://github.com/staciekith/mental-unload](https://github.com/staciekith/mental-unload)
+Project Link: [https://mental-unload-api.herokuapp.com](https://mental-unload-api.herokuapp.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

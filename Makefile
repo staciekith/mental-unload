@@ -24,8 +24,11 @@ db-upgrade:
 db-migrate:
 	docker-compose -f docker-compose.dev.yml exec api flask db migrate
 
-freeze-req:
-	docker-compose -f docker-compose.dev.yml exec pip3 freeze > requirements.txt
+req-install:
+	docker-compose -f docker-compose.dev.yml exec api pip3 install $(req)
+
+req-freeze:
+	docker-compose -f docker-compose.dev.yml exec api pip3 freeze > requirements.txt
 
 test:
 	docker-compose -f docker-compose.dev.yml exec api python3 -m pytest tests/

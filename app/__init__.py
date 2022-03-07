@@ -28,9 +28,11 @@ def create_app(config_object=Config):
         from app.api.event_type_api import event_type_api
         from app.api.event_api import event_api
         from app.api.auth_api import auth_api
+        from app.api.documentation_api import documentation_api
 
         app.register_blueprint(event_type_api)
         app.register_blueprint(event_api)
         app.register_blueprint(auth_api)
+        app.register_blueprint(documentation_api)
 
         return app

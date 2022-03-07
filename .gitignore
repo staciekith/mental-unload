@@ -133,3 +133,6 @@ dmypy.json
 
 # Docker
 docker/data/postgres
+
+# MacOs
+.DS_store
