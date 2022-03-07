@@ -1,0 +1,588 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Mental unload API",
+      "description": "An API unload your mental charge."
+    },
+    "components": {
+      "securitySchemes": {
+        "Autorization": {
+          "type": "http",
+          "scheme": "Bearer"
+        }
+      },
+      "schemas": {
+        "EventType-response": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "reminder_delay": {
+              "type": "integer"
+            },
+            "unit_duration": {
+              "type": "integer"
+            },
+            "unit_label": {
+              "type": "string"
+            },
+            "unit_quantity": {
+              "type": "string"
+            },
+            "user": {
+              "type": "string"
+            }
+          }
+        },
+        "EventType-body": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "reminder_delay": {
+              "type": "integer"
+            },
+            "unit_duration": {
+              "type": "integer"
+            },
+            "unit_label": {
+              "type": "string"
+            },
+            "unit_quantity": {
+              "type": "string"
+            },
+            "user": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "description",
+            "reminder_delay",
+            "unit_duration",
+            "unit_label",
+            "unit_quantity"
+          ]
+        },
+        "Event-response": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "title": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            },
+            "done_at": {
+              "type": "string"
+            },
+            "due_at": {
+              "type": "string"
+            },
+            "remind_at": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "type_id": {
+              "type": "integer"
+            },
+            "user": {
+              "type": "string"
+            }
+          }
+        },
+        "Event-body": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            },
+            "done_at": {
+              "type": "string"
+            },
+            "due_at": {
+              "type": "string"
+            },
+            "remind_at": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "type_id": {
+              "type": "integer"
+            },
+            "user": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "title",
+            "quantity",
+            "type_id"
+          ]
+        }
+      }
+    },
+    "security": [
+      {
+        "Autorization": []
+      }
+    ],
+    "paths": {
+      "/event_types": {
+        "get": {
+          "tags": [
+            "EventType"
+          ],
+          "description": "Get the connected user's event types",
+          "responses": {
+            "200": {
+              "description": "List of event types",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EventType-response"
+                  },
+                  "example": [
+                    {
+                      "id": 1,
+                      "description": "Viande de boeuf",
+                      "name": "Viande Hime",
+                      "reminder_delay": 48,
+                      "unit_duration": 12,
+                      "unit_label": "g",
+                      "unit_quantity": 170,
+                      "user": "auth0|123456"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "EventType"
+          ],
+          "description": "Create a new event type for the connected user",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventType-body"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created event type",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EventType-response"
+                  },
+                  "example": {
+                    "id": 1,
+                    "description": "Viande de boeuf",
+                    "name": "Viande Hime",
+                    "reminder_delay": 48,
+                    "unit_duration": 12,
+                    "unit_label": "g",
+                    "unit_quantity": 170,
+                    "user": "auth0|123456"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid data",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "data": {
+                      "missing_fields": [
+                        "name",
+                        "description",
+                        "unit_label",
+                        "unit_quantity",
+                        "unit_duration",
+                        "reminder_delay"
+                      ]
+                    },
+                    "message": "Some fields are missing."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/event_types/{id}": {
+        "put": {
+          "tags": [
+            "EventType"
+          ],
+          "description": "Update the given event type",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": "The EventType ID"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventType-body"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created event type",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EventType-response"
+                  },
+                  "example": {
+                    "id": 1,
+                    "description": "Viande de boeuf",
+                    "name": "Viande Hime",
+                    "reminder_delay": 48,
+                    "unit_duration": 12,
+                    "unit_label": "g",
+                    "unit_quantity": 170,
+                    "user": "auth0|123456"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid data",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "data": {
+                      "missing_fields": [
+                        "name",
+                        "description",
+                        "unit_label",
+                        "unit_quantity",
+                        "unit_duration",
+                        "reminder_delay"
+                      ]
+                    },
+                    "message": "Some fields are missing."
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {
+                "application/json": {
+                  "example": "EventType with ID 6 does not exist"
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "EventType"
+          ],
+          "description": "Delete the given event type",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": "The EventType ID"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Removed event type",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/EventType-response"
+                  },
+                  "example": {
+                    "id": 1,
+                    "description": "Viande de boeuf",
+                    "name": "Viande Hime",
+                    "reminder_delay": 48,
+                    "unit_duration": 12,
+                    "unit_label": "g",
+                    "unit_quantity": 170,
+                    "user": "auth0|123456"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {
+                "application/json": {
+                  "example": "EventType with ID 6 does not exist"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/events": {
+        "get": {
+          "tags": [
+            "Event"
+          ],
+          "description": "Get the connected user's events",
+          "responses": {
+            "200": {
+              "description": "List of events",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event-response"
+                  },
+                  "example": [
+                    {
+                      "id": 1,
+                      "done_at": "Mon, 07 Mar 2022 18:07:35 GMT",
+                      "due_at": null,
+                      "quantity": 2,
+                      "remind_at": null,
+                      "status": "done",
+                      "title": "Shampoing Respire peche",
+                      "type_id": 2,
+                      "user": "auth0|123456"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Event"
+          ],
+          "description": "Create a new eventfor the connected user",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event-body"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created event",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event-response"
+                  },
+                  "example": {
+                    "id": 1,
+                    "done_at": "Mon, 07 Mar 2022 18:07:35 GMT",
+                    "due_at": null,
+                    "quantity": 2,
+                    "remind_at": null,
+                    "status": "done",
+                    "title": "Shampoing Respire peche",
+                    "type_id": 2,
+                    "user": "auth0|123456"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid data",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "data": {
+                      "missing_fields": [
+                        "title",
+                        "quantity",
+                        "type_id"
+                      ]
+                    },
+                    "message": "Some fields are missing."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/events/{id}": {
+        "put": {
+          "tags": [
+            "Event"
+          ],
+          "description": "Update the given event",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": "The Event ID"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event-body"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created event",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event-response"
+                  },
+                  "example": {
+                    "id": 1,
+                    "done_at": "Mon, 07 Mar 2022 18:07:35 GMT",
+                    "due_at": null,
+                    "quantity": 2,
+                    "remind_at": null,
+                    "status": "done",
+                    "title": "Shampoing Respire peche",
+                    "type_id": 2,
+                    "user": "auth0|123456"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid data",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "data": {
+                      "missing_fields": [
+                        "title",
+                        "quantity",
+                        "type_id"
+                      ]
+                    },
+                    "message": "Some fields are missing."
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {
+                "application/json": {
+                  "example": "Event with ID 6 does not exist"
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Event"
+          ],
+          "description": "Delete the given event",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "description": "The Event ID"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Removed event",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Event-response"
+                  },
+                  "example": {
+                    "id": 1,
+                    "done_at": "Mon, 07 Mar 2022 18:07:35 GMT",
+                    "due_at": null,
+                    "quantity": 2,
+                    "remind_at": null,
+                    "status": "done",
+                    "title": "Shampoing Respire peche",
+                    "type_id": 2,
+                    "user": "auth0|123456"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {
+                "application/json": {
+                  "example": "Event with ID 6 does not exist"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
