@@ -140,7 +140,7 @@ To get a local copy up and running follow these simple example steps.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Please refer to the [Postman collection](https://www.getpostman.com/collections/81c82ff4d5838ce2ad79) for usage exemples.
+Please refer to the [Documentation](https://mental-unload-api.herokuapp.com) for usage exemples.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -161,6 +161,7 @@ Please refer to the [Postman collection](https://www.getpostman.com/collections/
 - [x] Dockerize
 - [x] Deployment
 - [x] API documentation
+- [ ] Protect specific routes by user
 - [ ] Logs ELK
 
 
